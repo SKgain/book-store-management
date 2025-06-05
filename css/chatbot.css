@@ -1,0 +1,48 @@
+#virtualAssistant{
+
+    background-color: #D4EBF8;
+    color: red;
+    font-family: "Nunito", serif;
+}
+#chatbox {
+    width: 360px;
+    height:140px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: scroll;
+}
+.user, .bot {
+    margin: 10px 0;
+}
+.user {
+    text-align: right;
+    color: blue;
+
+    padding-right: 5px;
+    border-right: 3px solid rgb(6, 250, 6);
+    background-color: rgb(183, 250, 183);
+}
+
+  
+  
+.bot {
+    text-align: left;
+    color: #1F4529;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    font-size: .9em;
+    padding-left: 5px;
+    border-left: 3px solid red;
+    background-color: rgb(250, 183, 183);
+   
+}
+
+#userInput {
+    width: 85%;
+    padding: 5px;
+}
+#sendBtn {
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 450px !important;
+}
