@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin panel | Sell Book</title>
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="img/weblogo.ico">
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">Sell Book</h2>
+    <form action="process_sell_book.php" method="POST" id="buyBookForm">
+        
+        <div class="mb-3">
+            <label for="bookId" class="form-label">Book ID</label>
+            <input type="text" class="form-control" name="bookId" value=" " required>
+        </div>
+
+        <div class="mb-3">
+            <label for="username" class="form-label">User Name(Customer)</label>
+            <input type="text" class="form-control" id="username" name="username" 
+                   value="" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" 
+                   value="" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="authorName" class="form-label">Author Name</label>
+            <input type="text" class="form-control" id="authorName" name="authorName" 
+                   value="" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Unit Price</label>
+            <input type="number" class="form-control" id="price" name="price" 
+                   value="" step="0.01" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" 
+                   min="1" max="3" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="totalPrice" class="form-label">Total Price</label>
+            <input type="text" class="form-control" id="totalPrice" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="date" class="form-label">Purchase Date</label>
+            <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sell</button>
+    </form>
+</div>
+
+<script src="js/bootstrap.bundle.js"></script>
+<script>
+    const quantityInput = document.getElementById('quantity');
+    const priceInput = document.getElementById('price');
+    const totalPriceInput = document.getElementById('totalPrice');
+
+    // Update total price dynamically as quantity changes
+    quantityInput.addEventListener('input', () => {
+        const quantity = parseFloat(quantityInput.value) || 0;
+        const price = parseFloat(priceInput.value) || 0;
+        const total = quantity * price;
+        totalPriceInput.value = total.toFixed(2);
+    });
+</script>
+</body>
+</html>

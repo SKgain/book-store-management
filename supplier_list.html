@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin panel | Supplier List</title>
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="img/weblogo.ico">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- Navbar -->
+ <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow-lg">
+    <div class="container-fluid">
+      <a href="#" class="navbar-brand"><img src="img/icon.png" style="height: 80px !important; width: 80px !important;" alt="Library Logo" id="logo-img"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a href="admin panel.html" target="_top" class="nav-link"><h2>Admin Panel</h2></a></li>
+        </ul>
+        <a href="admin_logout.php"><button class="btn btn-outline-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAuth">logout</button></a>
+        
+      </div>
+    </div>
+  </nav>
+  
+
+    <!-- Member List Table -->
+    <div class="container mt-5">
+        <h2 class="text-center">Supplier List</h2>
+        <a href="supplier_registration.html"><button class="btn btn-outline-primary mb-2">New Supplier Registration</button></a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Supplier Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Actions</th> <!-- Column for Update and Delete buttons -->
+                </tr>
+            </thead>
+            <tbody id="supplierList">
+                <!-- Member list will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js/bootstrap.bundle.js"></script>
+   
+<script>
+    // Fetch the member list from the server when the page loads
+    window.onload = function() {
+        fetch('get_suppliers.php')
+            .then(response => response.json())
+            .then(data => {
+                const memberList = document.getElementById('supplierList');
+                data.forEach(supplier => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${supplier.id}</td>
+                        <td>${supplier.fullname}</td>
+                        <td>${supplier.email}</td>
+                        <td>${supplier.address}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editSupplier(${supplier.id})">Edit</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteSupplier(${supplier.id})">Delete</button>
+                        </td>
+                    `;
+                    supplierList.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching supplier list:', error));
+    };
+
+    
+     // Redirect to update page with the member id
+     function editSupplier(id) {
+        window.location.href = `update_supplier.html?id=${id}`;
+    }
+
+    // Function to delete a member
+    function deleteSupplier(id) {
+        if (confirm("Are you sure you want to delete this supplier?")) {
+            fetch('delete_supplier.php', {
+                method: 'POST',
+                body: JSON.stringify({ id: id }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Supplier deleted successfully!");
+                    window.location.reload(); // Refresh the page to update the list
+                } else {
+                    alert("Error deleting supplier.");
+                }
+            })
+            .catch(error => console.error('Error deleting supplier:', error));
+        }
+    }
+
+    // Handle form submission for updating a member
+   
+</script>
+
+</body>
+</html>

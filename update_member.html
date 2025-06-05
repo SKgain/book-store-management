@@ -1,0 +1,60 @@
+<!-- update_member.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Member</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Update Member Details</h2>
+    <form id="updateForm" action="process_update_member.php" method="POST">
+        <input type="hidden" id="memberId" name="id">
+        
+        <div class="mb-3">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" readonly>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+
+<script>
+    // Get the member id from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const memberId = urlParams.get('id');  // e.g. ?id=123
+
+    if (memberId) {
+        // Fetch the member details based on the id
+        fetch(`get_member.php?id=${memberId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    // Pre-fill the form with member data
+                    document.getElementById('memberId').value = data.id;
+                    document.getElementById('fullname').value = data.fullname;
+                    document.getElementById('email').value = data.email;
+                    document.getElementById('username').value = data.username;
+                }
+            })
+            .catch(error => console.error('Error fetching member details:', error));
+    }
+</script>
+
+<script src="js/bootstrap.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Panel | View Profile</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="img/weblogo.ico">
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/Style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow-lg">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">
+                <img src="img/icon.png" class="img-fluid" style="height: 80px; width: 80px;" alt="Library Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a href="user panel.php" class="nav-link"><h2>User Panel</h2></a></li>
+                </ul>
+                <a href="user_logout.php"><button class="btn btn-outline-light">Logout</button></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Body -->
+    <div class="container-fluid p-5" style="background-image: url('img/profile.jpg'); background-size: cover; background-position: center; min-height: 100vh;">
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
+                <div class="card shadow-sm p-4 mt-5">
+                    <h3 class="text-center mb-4">User Profile</h3>
+                    <div class="row">
+                        <!-- Profile Info -->
+                        <div class="col-12">
+                            <p><strong>Name:</strong> <span id="fullname"></span></p>
+                            <p><strong>Email:</strong> <span id="email"></span></p>
+                            <p><strong>Username:</strong> <span id="username"></span></p>
+                            <a href="edit_profile.html" class="btn btn-warning btn-sm">Edit Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2024 Book Point. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        // Fetch user profile data from backend PHP (profile.php)
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('profile.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data && !data.error) {
+                        document.getElementById('fullname').textContent = data.fullname;
+                        document.getElementById('email').textContent = data.email;
+                        document.getElementById('username').textContent = data.username;
+                    } else {
+                        alert('Error fetching user data: ' + (data.error || 'Unknown error'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while fetching the profile data.');
+                });
+        });
+    </script>
+
+</body>
+</html>

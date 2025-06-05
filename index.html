@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Point</title>
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="img/weblogo.ico">
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/Style.css" />
+    <link rel="stylesheet" href="css/chatbot.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body
+    data-bs-spy="scroll"
+    data-bs-target=".navbar"
+    data-bs-offset="50"
+    tabindex="0"
+  >
+    <!-- Navbar -->
+    <nav
+      class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow-lg"
+    >
+      <div class="container-fluid">
+        <a href="#" class="navbar-brand"
+          ><img
+            src="img/icon.png"
+            style="height: 80px !important; width: 80px !important"
+            alt="Library Logo"
+            id="logo-img"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+            <li class="nav-item">
+              <a href="#aboutus" class="nav-link">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a href="#contactus" class="nav-link">Contact Us</a>
+            </li>
+          </ul>
+          <button
+            class="btn btn-outline-light"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasAuth"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Offcanvas -->
+    <div class="offcanvas offcanvas-end" id="offcanvasAuth" tabindex="-1">
+      <div class="offcanvas-header bg-danger text-white">
+        <h5 class="offcanvas-title">Authentication</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+        ></button>
+      </div>
+      <div class="offcanvas-body bg-success-subtle">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#userlogin"
+        >
+          User login</button
+        ><br />
+        <hr />
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#adminlogin"
+        >
+          Admin login</button
+        ><br />
+        <hr />
+        <a
+          href="NewUserRegistration.html"
+          style="text-decoration: none; color: white"
+          class="offcanvasItem"
+          target="_blank"
+          ><button
+            class="btn btn-outline-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#adminlogin"
+          >
+            New User Registration
+          </button></a
+        >
+      </div>
+    </div>
+    <!-- Off canvas end -->
+
+    <!-- modal section start-->
+
+    <div class="row">
+      <div class="col-12">
+        <!-- modal section for user login start-->
+
+        <div class="modal" tabindex="-1" id="userlogin">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header bg-success-subtle">
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+
+              <div
+                class="modal-body bg-primary-subtle p-5"
+                style="
+                  background-image: url('img/loginformimg.jpg') !important;
+                  background-size: cover !important;
+                  background-position: center !important;
+                  background-repeat: no-repeat !important;
+                "
+              >
+                <div
+                  class="d-flex justify-content-center align-items-center"
+                  style="opacity: 0.9"
+                >
+                  <div class="card shadow-sm p-4" style="width: 400px">
+                    <h3 class="text-center mb-4">User Login</h3>
+                    <form action="user_login.php" method="POST">
+                      <div class="mb-3">
+                        <label for="username" class="form-label"
+                          >Username</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="username"
+                          name="username"
+                          placeholder="Enter your username"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="password" class="form-label"
+                          >Password</label
+                        >
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="password"
+                          name="password"
+                          placeholder="Enter your password"
+                          required
+                        />
+                      </div>
+                      <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                          Login
+                        </button>
+                      </div>
+                      <div class="text-center mt-3">
+                        <a href="#" class="text-secondary">Forgot Password?</a>
+                      </div>
+                      <div class="d-grid">
+                        <a
+                          href="NewUserRegistration.html"
+                          class="btn btn-outline-primary mt-3"
+                          >Create an Account</a
+                        >
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer bg-success-subtle"></div>
+            </div>
+          </div>
+        </div>
+        <!-- modal section for user login start end -->
+
+        <!-- modal section for Admin login start-->
+
+        <div class="modal" tabindex="-1" id="adminlogin">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header bg-danger-subtle">
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div
+                class="modal-body bg-primary-subtle p-5"
+                style="
+                  background-image: url('img/loginformimg.jpg') !important;
+                  background-size: cover !important;
+                  background-position: center !important;
+                  background-repeat: no-repeat !important;
+                "
+              >
+                <div
+                  class="d-flex justify-content-center align-items-center"
+                  style="opacity: 0.9"
+                >
+                  <div class="card shadow-sm p-4" style="width: 400px">
+                    <h3 class="text-center mb-4">Admin Login</h3>
+                    <form action="admin_login.php" method="POST">
+                      <div class="mb-3">
+                        <label for="username" class="form-label"
+                          >Username</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="username"
+                          name="username"
+                          placeholder="Enter your username"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="password" class="form-label"
+                          >Password</label
+                        >
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="password"
+                          name="password"
+                          placeholder="Enter your password"
+                          required
+                        />
+                      </div>
+                      <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                          Login
+                        </button>
+                      </div>
+                      <div class="text-center mt-3">
+                        <a href="#" class="text-secondary">Forgot Password?</a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer bg-danger-subtle"></div>
+            </div>
+          </div>
+        </div>
+        <!-- modal section for Admin login start end -->
+      </div>
+    </div>
+    <!-- Modal section end -->
+
+    <!-- Carousel Section -->
+    <section id="home" class="container-fluid p-5 bg-success-subtle">
+      <div class="row">
+        <div class="col-md-4">
+          <h3 class="text-center" style="margin-top: 5px">Schedule</h3>
+          <div class="card shadow-sm mb-3">
+            <div class="card-body text-center">
+              <h5>Saturday-Wednesday</h5>
+              <p>8:00 AM - 9:00 PM</p>
+            </div>
+          </div>
+          <div class="card shadow-sm mb-3">
+            <div class="card-body text-center">
+              <h5>Thursday-Friday</h5>
+              <p>9:00 AM - 10:00 PM</p>
+            </div>
+          </div>
+          <!-- Virtual Assistant -->
+          <div class="card shadow-sm" id="virtualAssistant">
+            <div class="card-body text-center">
+              <h5>Virtual Assistant</h5>
+              <div id="chatbox" class="mb-2">
+                <div class="bot">Hello! How can I assist you today?</div>
+              </div>
+              <input
+                class="form-control"
+                type="text"
+                id="userInput"
+                placeholder="Ask something..."
+              />
+              <button class="btn btn-primary mt-2" id="sendBtn">Send</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div
+            id="carouselExample"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carouselExample"
+                data-bs-slide-to="0"
+                class="active"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExample"
+                data-bs-slide-to="1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExample"
+                data-bs-slide-to="2"
+              ></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="img/carsoulImg1.jpg"
+                  class="d-block w-100"
+                  alt="Library Image 1"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="img/carsoulImg2.jpg"
+                  class="d-block w-100"
+                  alt="Library Image 2"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="img/carsoulImg3.jpg"
+                  class="d-block w-100"
+                  alt="Library Image 3"
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="prev"
+            >
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="next"
+            >
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Book list -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 bg-danger-subtle">
+          <h1 class="text-center p-5">Book List</h1>
+          <div class="row">
+            <div class="col-2">
+              <div class="card" id="bl-card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/To Kill a Mockingbird.jpg"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">To Kill a Mockingbird</h5>
+                  <p class="card-text justify-content-center">
+                    
+                  To Kill a Mockingbird is a classic novel written by Harper Lee,first published in 1960.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card" id="bl-card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/1984.jpg"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">1984</h5>
+                  <p class="card-text">
+                    1984 is a dystopian novel written by George Orwell, first published in 1949. The book explores.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/The Catcher in the Rye.jpg"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">The Catcher in the Rye</h5>
+                  <p class="card-text">
+                    The Catcher in the Rye is a novel by J.D. Salinger, first published.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/TheAlcemist.jpg"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">The Alchemist</h5>
+                  <p class="card-text">
+                    The Alchemist is a novel by Brazilian author Paulo Coelho, originally published.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/Norwegian Wood.jpg"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Norwegian Wood</h5>
+                  <p class="card-text">
+                    Norwegian Wood is a novel by Japanese author Haruki Murakami, first published in 1987.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/sapiens.jpg"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Sapiens</h5>
+                  <p class="card-text">
+                    Sapiens: A Brief History of Humankind is a non-fiction book by Israeli historian Yuval Noah Harari.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <br /><hr><br />
+
+          <div class="row mb-5">
+            <div class="col-2">
+              <div class="card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/The Great Gatsby.jpg"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">The Great Gatsby</h5>
+                  <p class="card-text justify-content-center">
+                    
+                    The Great Gatsby: A tale of love, wealth, and the pursuit of the American Dream in the Jazz Age......
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/Pride and Prejudice.jpg"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Pride and Prejudice</h5>
+                  <p class="card-text">
+                    A classic novel exploring themes of love, family, and societal expectations in 19th-century England.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/Chokher Bali.webp"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Chokher Bali</h5>
+                  <p class="card-text">
+                    Chokher Bali: A powerful story of love, betrayal, and human emotions set in Bengal.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/Pather Panchali.jpeg"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Pather Panchali</h5>
+                  <p class="card-text">
+                    A poignant tale of rural Bengal, focusing on the lives, struggles, and innocence of.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/Shesher Kobita.png"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Shesher Kobita</h5>
+                  <p class="card-text">
+                    A beautifully poetic love story that explores complex emotions, relationships, and self-discovery.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card" style="height: 580px !important;">
+                <img
+                  src="img/StoryBook/Devi Chaudhurani.jpg"
+                  style="height: 350px"
+                  class="card-img-top"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Devi Chaudhurani</h5>
+                  <p class="card-text justify-content-center">
+                    
+                    A gripping tale of adventure, revolution, and empowerment centered around a young woman.....
+                  </p>
+                  <a
+                    href="Userlogin.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    >Read</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Us -->
+    <section id="aboutus" class="py-5 bg-primary-subtle">
+      <div class="container">
+        <h2 class="text-center mb-4">About Us</h2>
+        <p class="text-center">
+          Welcome to <strong>Book Point</strong>, a place where knowledge
+          transcends boundaries and brings the world of literature, history, and
+          innovation to your fingertips.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Us -->
+    <section id="contactus" class="container-fluid py-5 bg-dark-subtle">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Contact Us</h2>
+          <p>Address: House-34, Road-11, Sector-10, Uttara, Dhaka-1200</p>
+          <p>Phone: +880 1319806363</p>
+          <p>Email: info@bookpoint.com</p>
+        </div>
+        <div class="col-md-6">
+          <form action="contact_us.php" method="POST">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" name="fullname" id="name" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" name="email" id="email" required />
+            </div>
+            <div class="mb-3">
+              <label for="message"  class="form-label">Your Message</label>
+              <textarea
+                class="form-control"
+                id="message"
+                name="message"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-1">
+            <h5 class=" ">Follow Us</h5>
+            <ul class="list-unstyled d-flex justify-content-center">
+              <li class="mx-2">
+                <a href="#"><i class="fab fa-facebook text-white"></i></a>
+              </li>
+              <li class="mx-2">
+                <a href="#"><i class="fab fa-twitter text-white"></i></a>
+              </li>
+              <li class="mx-2">
+                <a href="#"><i class="fab fa-instagram text-white"></i></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-10 text-center">
+            <p>&copy; 2024 Book Point. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/smooth.js"></script>
+  </body>
+</html>

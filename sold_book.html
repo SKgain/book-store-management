@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Sold Book</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="img/weblogo.ico">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow-lg">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand"><img src="img/icon.png" style="height: 80px; width: 80px;" alt="Library Logo" id="logo-img"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a href="admin panel.html" class="nav-link"><h2>Admin Panel</h2></a></li>
+            </ul>
+            <a href="admin_logout.php"><button class="btn btn-outline-light">Logout</button></a>
+        </div>
+    </div>
+</nav>
+
+<!-- Book List Table -->
+<div class="container mt-5">
+    <h2 class="text-center">Sold Book List</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Book Title</th>
+                <th>Book ID</th>
+                <th>Author Name</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Purchase Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="sold_book_list">
+            <!-- Book list will be dynamically inserted here -->
+        </tbody>
+    </table>
+</div>
+
+<script src="js/bootstrap.bundle.js"></script>
+<script>
+// Fetch the sold book list from the server when the page loads
+window.onload = function () {
+    const sold_book_list = document.getElementById('sold_book_list');
+    sold_book_list.innerHTML = "<tr><td colspan='8' class='text-center'>Loading...</td></tr>";
+
+    fetch('get_sold_book.php')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Debugging purpose
+            if (data.error) {
+                sold_book_list.innerHTML = `<tr><td colspan='8' class='text-center'>${data.error}</td></tr>`;
+                return;
+            }
+
+            if (data.length === 0) {
+                sold_book_list.innerHTML = "<tr><td colspan='8' class='text-center'>No books found.</td></tr>";
+                return;
+            }
+
+            sold_book_list.innerHTML = ""; // Clear loading text
+            data.forEach(sbl => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${sbl.user_name}</td>
+                    <td>${sbl.title}</td>
+                    <td>${sbl.bookId}</td>
+                    <td>${sbl.author_name}</td>
+                    <td>${sbl.price}</td>
+                    <td>${sbl.quantity}</td>
+                    <td>${sbl.purches_date}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deleteSoldBookList(${sbl.id})">Delete</button>
+                    </td>
+                `;
+                sold_book_list.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching book list:', error);
+            sold_book_list.innerHTML = "<tr><td colspan='8' class='text-center'>Failed to load book list.</td></tr>";
+        });
+};
+
+// Function to delete a book entry
+function deleteSoldBookList(id) {
+    if (confirm("Are you sure you want to delete this entry?")) {
+        fetch('delete_sold_book_list.php', {
+            method: 'POST',
+            body: JSON.stringify({ id: id }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Entry deleted successfully!");
+                const row = document.querySelector(`button[onclick="deleteSoldBookList(${id})"]`).closest('tr');
+                row.remove();
+
+                // Check if table is empty after deletion
+                const rowsLeft = document.querySelectorAll('#sold_book_list tr').length;
+                if (rowsLeft === 0) {
+                    sold_book_list.innerHTML = "<tr><td colspan='8' class='text-center'>No books found.</td></tr>";
+                }
+            } else {
+                alert(data.error || "Error deleting entry.");
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting entry:', error);
+            alert("Error deleting entry.");
+        });
+    }
+}
+</script>
+</body>
+</html>

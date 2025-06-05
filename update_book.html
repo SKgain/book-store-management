@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Update Book Details</h2>
+    <form id="updateForm" action="process_update_book.php" method="POST">
+        <input type="hidden" id="bookId" name="id">
+        
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="authorName" class="form-label">Author name</label>
+            <input type="text" class="form-control" id="authorName" name="authorName" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="unit" class="form-label">Unit</label>
+            <input type="number" class="form-control" id="unit" name="unit" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+
+<script>
+    // Get the book id from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const bookId = urlParams.get('id');  // e.g. ?id=123
+
+    if (bookId) {
+        // Fetch the book details based on the id
+        fetch(`get_book.php?id=${bookId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    // Pre-fill the form with book data
+                    document.getElementById('bookId').value = data.id;
+                    document.getElementById('title').value = data.title;
+                    document.getElementById('authorName').value = data.author_name;
+                    document.getElementById('price').value = data.price;
+                    document.getElementById('unit').value = data.unit;
+                }
+            })
+            .catch(error => console.error('Error fetching book details:', error));
+    }
+</script>
+
+<script src="js/bootstrap.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Purchase History </title>
+    <link rel="icon" type="image/x-icon" href="img/weblogo.ico">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.bundle.js"></script>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow-lg">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand"><img src="img/icon.png" style="height: 80px; width: 80px;" alt="Library Logo" id="logo-img"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a href="admin panel.html" class="nav-link"><h2>Admin Panel</h2></a></li>
+            </ul>
+            <a href="admin_logout.php"><button class="btn btn-outline-light">Logout</button></a>
+        </div>
+    </div>
+</nav>
+
+<!-- Search Form -->
+<div class="container mt-5">
+    <h2 class="text-center">User Purchase History</h2>
+    <form id="searchForm" class="d-flex justify-content-center mb-4">
+        <input type="text" id="userNameInput" class="form-control w-50" placeholder="Enter User Name" required>
+        <button type="submit" class="btn btn-primary ms-3">Search</button>
+    </form>
+
+    <!-- Purchase History Table -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Book ID</th>
+                <th>Author Name</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Purchase Date</th>
+            </tr>
+        </thead>
+        <tbody id="userHistoryTable">
+            <!-- History will be dynamically inserted here -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+// Handle the form submission
+document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    const userName = document.getElementById('userNameInput').value.trim();
+    const userHistoryTable = document.getElementById('userHistoryTable');
+    userHistoryTable.innerHTML = "<tr><td colspan='6' class='text-center'>Loading...</td></tr>";
+
+    // Fetch the user's purchase history
+    fetch(`get_user_history.php?user_name=${encodeURIComponent(userName)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+                userHistoryTable.innerHTML = "<tr><td colspan='6' class='text-center'>Error loading history.</td></tr>";
+                return;
+            }
+
+            if (data.length === 0) {
+                userHistoryTable.innerHTML = "<tr><td colspan='6' class='text-center'>No purchase history found.</td></tr>";
+                return;
+            }
+
+            // Populate the table with the user's purchase history
+            userHistoryTable.innerHTML = "";
+            data.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entry.title}</td>
+                    <td>${entry.bookId}</td>
+                    <td>${entry.author_name}</td>
+                    <td>${entry.price}</td>
+                    <td>${entry.quantity}</td>
+                    <td>${entry.purches_date}</td>
+                `;
+                userHistoryTable.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching user history:', error);
+            userHistoryTable.innerHTML = "<tr><td colspan='6' class='text-center'>Failed to load history.</td></tr>";
+        });
+});
+</script>
+
+</body>
+</html>

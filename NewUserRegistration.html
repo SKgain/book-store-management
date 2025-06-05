@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Point | User Registration</title>
+     <!-- favicon -->
+     <link rel="icon" type="image/x-icon" href="img/weblogo.ico">
+    <!-- css link here -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/Styel.css">
+    <!-- google fonts link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Satisfy&display=swap" rel="stylesheet">
+    <!-- font awesome link -->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+</head>
+<body>
+
+ <!-- Navbar -->
+ <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow-lg">
+  <div class="container-fluid">
+    <a href="#" class="navbar-brand"><img src="img/icon.png" style="height: 80px !important; width: 80px !important;" alt="Library Logo" id="logo-img"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a href="index.html" target="_top"  class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="index.html" target="_top"  class="nav-link">About Us</a></li>
+        <li class="nav-item"><a href="index.html" target="_top"  class="nav-link">Contact Us</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+
+
+</div>
+    <!-- body -->
+     <div class="container-fluid">
+      <div class="row" style="background-image: url('img/userregistration.png'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh;">
+
+            <div class="col-12" >
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="card shadow-sm p-4" style="width: 500px; margin-top: 70px; opacity: .9;">
+                      <h3 class="text-center mb-4">Create an Account</h3>
+                      <form action="register_user.php" method="POST">
+                        <!-- Full Name -->
+                        <div class="mb-3">
+                          <label for="fullname" class="form-label">Full Name</label>
+                          <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                        </div>
+                        <!-- Email -->
+                        <div class="mb-3">
+                          <label for="email" class="form-label">Email Address</label>
+                          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <!-- Username -->
+                        <div class="mb-3">
+                          <label for="username" class="form-label">Username</label>
+                          <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
+                        </div>
+                        <!-- Password -->
+                        <div class="mb-3">
+                          <label for="password" class="form-label">Password</label>
+                          <input type="password" class="form-control" id="password" name="password" placeholder="Choose a password" required>
+                        </div>
+                        
+                        
+                        <!-- Submit Button -->
+                        <div class="d-grid mb-3">
+                          <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                        <!-- Login Button -->
+                        <div class="d-grid">
+                          <a href="Userlogin.html" class="btn btn-outline-secondary">Already have an account? Login</a>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+            </div>
+        </div>
+     </div>
+
+      <!-- footer -->
+
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-12" style="background-color: black;">
+
+      <!-- Footer Bottom -->
+                  <div class="text-center mt-4">
+                    <p class="text-white">&copy; 2024 Book Point. All rights reserved.</p>
+                  </div>
+                  
+            </div>
+        </div>
+      </div>
+
+
+      <script src="js/bootstrap.bundle.js"></script>
+      <script>
+       document.querySelectorAll('.nav-link').forEach(link => {
+       link.addEventListener('click', function(e) {
+       const target = this.getAttribute('href');
+       if (target.startsWith('#')) {
+           e.preventDefault();
+           document.querySelector(target).scrollIntoView({
+           behavior: 'smooth',
+            block: 'start'
+         });
+               }
+                    });
+                          });
+
+      </script>
+</body>
+</html>
